@@ -10,7 +10,7 @@ var topics = [];
 	console.log(x);
 
   var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + x + "&api_key=e6OFIzIJm8CK6O6aiWItgKxH4bKZTzjB&limit=10";
-  
+
 	console.log(queryURL);
 
 	$.ajax({
@@ -20,7 +20,7 @@ var topics = [];
         	var results = response.data;
         	console.log(results);
         	for (var i = 0; i < results.length; i++) {
-        	
+
         	var topicsDiv = $("<div class='col-md-4'>");
 
         	var rating = results[i].rating;
@@ -84,5 +84,33 @@ var topics = [];
         $(this).attr("data-state", "still");
   }
 }
+
+});
+
+
+
+//lindsay code
+
+
+$.ajax({
+ url: queryURL,
+ method: "GET"
+}).then(function(response) {
+    console.log(response);
+    var reactionDiv = $("#reactionsDiv");
+    var gifs = response.data;
+    console.log(gifs);
+
+  for (var i = 0; i < gifs.length; i++) {
+    var gif = $('<img>')
+    gif.attr("src", gifs[i].images.fixed_height_still.url);
+    gif.attr("state", "still");
+    gif.attr("still",gifs[i].images.fixed_height_still.url);
+    gif.attr("animate",gifs[i].images.fixed_height.url);
+    var rating = gifs[i].rating;  // changes rating with the gif (jag)
+    var p = $("<p>").text("Rating: " + rating);
+
+    reactionDiv.append(p);
+  };
 
 });
