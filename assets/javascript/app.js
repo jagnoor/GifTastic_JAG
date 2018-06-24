@@ -88,29 +88,3 @@ var topics = [];
 });
 
 
-
-//lindsay code
-
-
-$.ajax({
- url: queryURL,
- method: "GET"
-}).then(function(response) {
-    console.log(response);
-    var reactionDiv = $("#reactionsDiv");
-    var gifs = response.data;
-    console.log(gifs);
-
-  for (var i = 0; i < gifs.length; i++) {
-    var gif = $('<img>')
-    gif.attr("src", gifs[i].images.fixed_height_still.url);
-    gif.attr("state", "still");
-    gif.attr("still",gifs[i].images.fixed_height_still.url);
-    gif.attr("animate",gifs[i].images.fixed_height.url);
-    var rating = gifs[i].rating;  // changes rating with the gif (jag)
-    var p = $("<p>").text("Rating: " + rating);
-
-    reactionDiv.append(p);
-  };
-
-});
